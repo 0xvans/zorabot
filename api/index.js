@@ -33,9 +33,8 @@ export default async function handler(req, res) {
       const lines = [
         `👤 <b>${p.displayName || p.handle}</b> (@${p.handle})`,
         `💎 <b>Contract:</b> <code>${node.address}</code>`,
-        `📊 <b>Market Cap:</b> ${node.marketCap || "0"}`,
         "",
-        `🌐 <b>Followers Zora:</b> ${p.vcFollowingTokenHolders?.count ?? 0}`,
+        `🌐 <b>Zora Followers:</b> ${p.vcFollowingTokenHolders?.count ?? 0}`,
         socials.twitter
           ? `🐦 Twitter: @${socials.twitter.username} (${socials.twitter.followerCount ?? 0})`
           : "",
@@ -55,10 +54,11 @@ export default async function handler(req, res) {
 
       const caption = lines.join("\n");
 
-      await bot.telegram.sendPhoto(CHANNEL_ID, node.avatar?.downloadableUri || node.mediaContent?.downloadableUri || "https://picsum.photos/200", {
-        caption,
-        parse_mode: "HTML"
-      });
+      await bot.telegram.sendPhoto(
+        CHANNEL_ID,
+        node.avatar?.downloadableUri || node.mediaContent?.downloadableUri || "https://picsum.photos/200",
+        { caption, parse_mode: "HTML" }
+      );
     }
 
     res.status(200).json({ message: "Sent to Telegram successfully" });
