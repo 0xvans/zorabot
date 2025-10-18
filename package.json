@@ -2,8 +2,9 @@
   "name": "zorabot",
   "version": "1.0.0",
   "type": "module",
+  "main": "api/index.js",
   "dependencies": {
     "node-fetch": "^3.3.2",
-    "telegraf": "^4.12.3"
+    "telegraf": "^4.16.3"
   }
 }
